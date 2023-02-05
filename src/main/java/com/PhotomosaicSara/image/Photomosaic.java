@@ -33,5 +33,4 @@ public class Photomosaic {
         final var output = service.makeOutputImage(width, height, outputImageParts);
         ImageIO.write(output, "jpg", new File("photomosaicImage.jpg"));
     }
-
 }

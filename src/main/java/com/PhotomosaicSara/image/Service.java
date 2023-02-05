@@ -49,7 +49,7 @@ public class Service {
             for (int y = 0; y < Tile.scaledHeight; y++) {
                 int targetPixel = target.getRGB(x, y);
                 Pixel candidatePixel = tile.pixels[x][y];
-                int diff = getDiff(targetPixel, candidatePixel);
+                int diff = getDifference(targetPixel, candidatePixel);
                 int score;
                 score = 255 * 3 - diff;
                 total += score;
@@ -58,7 +58,7 @@ public class Service {
         return total;
     }
 
-    private int getDiff(int target, Pixel candidate) {
+    private int getDifference(int target, Pixel candidate) {
         return Math.abs(getRed(target) - candidate.r) +
                 Math.abs(getGreen(target) - candidate.g) +
                 Math.abs(getBlue(target) - candidate.b);
@@ -97,5 +97,4 @@ public class Service {
         }
         return parts;
     }
-
 }
