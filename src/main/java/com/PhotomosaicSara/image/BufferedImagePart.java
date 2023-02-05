@@ -13,4 +13,5 @@ public class BufferedImagePart {
         this.x = x;
         this.y = y;
     }
+
 }

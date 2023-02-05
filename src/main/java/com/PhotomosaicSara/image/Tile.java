@@ -41,4 +41,5 @@ public class Tile {
         int count = tileScale * tileScale;
         return new Pixel(redTotal / count, greenTotal / count, blueTotal / count);
     }
+
 }

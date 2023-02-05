@@ -23,4 +23,5 @@ public class Pixel {
     public static int getBlue(int pixel) {
         return pixel & 0xff;
     }
+
     }
