@@ -24,5 +24,4 @@ public class Pixel {
         return pixel & 0xff;
     }
 
-
     }

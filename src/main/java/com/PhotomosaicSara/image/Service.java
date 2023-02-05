@@ -10,31 +10,13 @@ import java.util.HashSet;
 
 import static com.PhotomosaicSara.image.Pixel.*;
 
-public class MainPhotomosaic {
+public class Service {
 
     private static final int TILE_WIDTH = 90;
     private static final int TILE_HEIGHT = 90;
     private static final int TILE_SCALE = 9;
 
-    public static void main(String[] args) throws IOException {
-        final var tileImages = getImagesFromTiles(new File("source_images"));
-        final var inputImageFile = new File("mainImage.jpg");
-        final var inputImageParts = getImagesFromInput(inputImageFile);
-        final Collection<BufferedImagePart> outputImageParts = Collections.synchronizedSet(new HashSet<>());
-
-        for (final BufferedImagePart inputImagePart : inputImageParts) {
-            final var bestFitTile = getBestFitTile(inputImagePart.image, tileImages);
-            outputImageParts.add(new BufferedImagePart(bestFitTile.image, inputImagePart.x, inputImagePart.y));
-        }
-
-        final var inputImage = ImageIO.read(inputImageFile);
-        final var width = inputImage.getWidth();
-        final var height = inputImage.getHeight();
-        final var output = makeOutputImage(width, height, outputImageParts);
-        ImageIO.write(output, "jpg", new File("photomosaicImage.jpg"));
-    }
-
-    private static BufferedImage makeOutputImage(int width, int height, Collection<BufferedImagePart> parts) {
+    public BufferedImage makeOutputImage(int width, int height, Collection<BufferedImagePart> parts) {
         final var image = new BufferedImage(width * TILE_SCALE, height * TILE_SCALE, BufferedImage.TYPE_3BYTE_BGR);
 
         for (BufferedImagePart part : parts) {
@@ -44,7 +26,7 @@ public class MainPhotomosaic {
         return image;
     }
 
-    private static Tile getBestFitTile(BufferedImage target, Collection<Tile> tiles) {
+    public Tile getBestFitTile(BufferedImage target, Collection<Tile> tiles) {
         Tile bestFit = null;
         int bestFitScore = -1;
 
@@ -58,7 +40,7 @@ public class MainPhotomosaic {
         return bestFit;
     }
 
-    private static int getScore(BufferedImage target, Tile tile) {
+    private int getScore(BufferedImage target, Tile tile) {
         assert target.getHeight() == Tile.scaledHeight;
         assert target.getWidth() == Tile.scaledWidth;
 
@@ -76,13 +58,13 @@ public class MainPhotomosaic {
         return total;
     }
 
-    private static int getDiff(int target, Pixel candidate) {
+    private int getDiff(int target, Pixel candidate) {
         return Math.abs(getRed(target) - candidate.r) +
                 Math.abs(getGreen(target) - candidate.g) +
                 Math.abs(getBlue(target) - candidate.b);
     }
 
-    private static Collection<Tile> getImagesFromTiles(File tilesDir) throws IOException {
+    public Collection<Tile> getImagesFromTiles(File tilesDir) throws IOException {
         Collection<Tile> tileImages = Collections.synchronizedSet(new HashSet<>());
         final var files = tilesDir.listFiles();
         assert files != null;
@@ -93,7 +75,7 @@ public class MainPhotomosaic {
         return tileImages;
     }
 
-    private static Collection<BufferedImagePart> getImagesFromInput(File inputImgFile) throws IOException {
+    public Collection<BufferedImagePart> getImagesFromInput(File inputImgFile) throws IOException {
 
         Collection<BufferedImagePart> parts = new HashSet<>();
         final var inputImage = ImageIO.read(inputImgFile);
