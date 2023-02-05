@@ -1,8 +1,9 @@
-package com.PhotomosaicSara.photomosaicImage;
+package com.PhotomosaicSara.image;
 
 import java.awt.image.BufferedImage;
 
 public class BufferedImagePart {
+
     public BufferedImage image;
     public int x;
     public int y;

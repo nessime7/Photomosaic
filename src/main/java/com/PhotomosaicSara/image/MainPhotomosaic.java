@@ -1,4 +1,4 @@
-package com.PhotomosaicSara.photomosaicImage;
+package com.PhotomosaicSara.image;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -8,9 +8,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 
-import static com.PhotomosaicSara.photomosaicImage.Pixel.*;
+import static com.PhotomosaicSara.image.Pixel.*;
 
 public class MainPhotomosaic {
+
     private static final String TILES_DIRECTION = "source_images";
     private static final String INPUT_IMG = "mainImage.jpg";
     private static final String OUTPUT_IMG = "photomosaicImage.jpg";

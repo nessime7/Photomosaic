@@ -1,6 +1,7 @@
-package com.PhotomosaicSara.photomosaicImage;
+package com.PhotomosaicSara.image;
 
 public class Pixel {
+
         public int r;
         public int g;
         public int b;

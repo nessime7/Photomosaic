@@ -1,4 +1,4 @@
-package com.PhotomosaicSara.photomosaicPixel;
+package com.PhotomosaicSara.pixel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -10,6 +10,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class MainPixel {
+
     private static final int TILE_SIZE = 5;
 
     public static void main(String[] args) throws IOException {

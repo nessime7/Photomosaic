@@ -1,8 +1,9 @@
-package com.PhotomosaicSara.photomosaicPixel;
+package com.PhotomosaicSara.pixel;
 
 import java.awt.image.BufferedImage;
 
 public class ImageScore {
+
     public final int score;
     public final BufferedImage image;
 
