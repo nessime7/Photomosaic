@@ -4,9 +4,6 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
 
 public class Photomosaic {
 
@@ -22,7 +19,6 @@ public class Photomosaic {
         final var inputImageParts = photomosaicService.getImagesFromInput(inputImageFile);
         //  final Collection<BufferedImagePart> outputImageParts = Collections.synchronizedSet(new HashSet<>());
         final ArrayList<BufferedImagePart> outputImageParts = new ArrayList<>();
-
 
         for (final var inputImagePart : inputImageParts) {
             final var bestFitTile = photomosaicService.getBestFitTile(inputImagePart.image, tileImages);

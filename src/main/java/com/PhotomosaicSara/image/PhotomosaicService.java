@@ -76,10 +76,8 @@ public class PhotomosaicService {
     }
 
     public Collection<BufferedImagePart> getImagesFromInput(File inputImgFile) throws IOException {
-
         Collection<BufferedImagePart> parts = new HashSet<>();
         final var inputImage = ImageIO.read(inputImgFile);
-
         final var totalHeight = inputImage.getHeight();
         final var totalWidth = inputImage.getWidth();
         int x = 0;
