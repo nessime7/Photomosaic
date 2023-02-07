@@ -10,7 +10,7 @@ import java.util.HashSet;
 
 import static com.PhotomosaicSara.image.Pixel.*;
 
-public class Service {
+public class PhotomosaicService {
 
     private static final int TILE_WIDTH = 90;
     private static final int TILE_HEIGHT = 90;
@@ -19,7 +19,7 @@ public class Service {
     public BufferedImage makeOutputImage(int width, int height, Collection<BufferedImagePart> parts) {
         final var image = new BufferedImage(width * TILE_SCALE, height * TILE_SCALE, BufferedImage.TYPE_3BYTE_BGR);
 
-        for (BufferedImagePart part : parts) {
+        for (final var part : parts) {
             final var imagePart = image.getSubimage(part.x * TILE_SCALE, part.y * TILE_SCALE, TILE_WIDTH, TILE_HEIGHT);
             imagePart.setData(part.image.getData());
         }
@@ -30,8 +30,8 @@ public class Service {
         Tile bestFit = null;
         int bestFitScore = -1;
 
-        for (Tile tile : tiles) {
-            int score = getScore(target, tile);
+        for (final var tile : tiles) {
+            final var score = getScore(target, tile);
             if (score > bestFitScore) {
                 bestFitScore = score;
                 bestFit = tile;
@@ -47,9 +47,9 @@ public class Service {
         int total = 0;
         for (int x = 0; x < Tile.scaledWidth; x++) {
             for (int y = 0; y < Tile.scaledHeight; y++) {
-                int targetPixel = target.getRGB(x, y);
-                Pixel candidatePixel = tile.pixels[x][y];
-                int diff = getDifference(targetPixel, candidatePixel);
+                final var targetPixel = target.getRGB(x, y);
+                final var candidatePixel = tile.pixels[x][y];
+                final var diff = getDifference(targetPixel, candidatePixel);
                 int score;
                 score = 255 * 3 - diff;
                 total += score;
@@ -68,8 +68,8 @@ public class Service {
         Collection<Tile> tileImages = Collections.synchronizedSet(new HashSet<>());
         final var files = tilesDir.listFiles();
         assert files != null;
-        for (File file : files) {
-            BufferedImage img = ImageIO.read(file);
+        for (final var file : files) {
+            final var img = ImageIO.read(file);
             tileImages.add(new Tile(img));
         }
         return tileImages;
@@ -80,15 +80,15 @@ public class Service {
         Collection<BufferedImagePart> parts = new HashSet<>();
         final var inputImage = ImageIO.read(inputImgFile);
 
-        int totalHeight = inputImage.getHeight();
-        int totalWidth = inputImage.getWidth();
+        final var totalHeight = inputImage.getHeight();
+        final var totalWidth = inputImage.getWidth();
         int x = 0;
         int y = 0;
         int w = Tile.scaledWidth;
         int h = Tile.scaledHeight;
         while (x + w <= totalWidth) {
             while (y + h <= totalHeight) {
-                BufferedImage inputImagePart = inputImage.getSubimage(x, y, w, h);
+                final var inputImagePart = inputImage.getSubimage(x, y, w, h);
                 parts.add(new BufferedImagePart(inputImagePart, x, y));
                 y += h;
             }
@@ -97,5 +97,4 @@ public class Service {
         }
         return parts;
     }
-
 }

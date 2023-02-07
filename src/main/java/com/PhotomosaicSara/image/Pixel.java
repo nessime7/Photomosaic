@@ -2,9 +2,9 @@ package com.PhotomosaicSara.image;
 
 public class Pixel {
 
-        public int r;
-        public int g;
-        public int b;
+        public final int r;
+        public final int g;
+        public final int b;
 
         public Pixel(int r, int g, int b) {
             this.r = r;
@@ -23,5 +23,4 @@ public class Pixel {
     public static int getBlue(int pixel) {
         return pixel & 0xff;
     }
-
     }

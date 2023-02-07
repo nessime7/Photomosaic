@@ -54,4 +54,5 @@ public class MainPixel {
         int deltaBlue = a.getBlue() - b.getBlue();
         return deltaRed * deltaRed + deltaGreen * deltaGreen + deltaBlue * deltaBlue;
     }
+
 }

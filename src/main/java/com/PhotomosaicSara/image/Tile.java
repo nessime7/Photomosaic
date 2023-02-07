@@ -32,14 +32,13 @@ public class Tile {
 
         for (int i = 0; i < tileScale; i++) {
             for (int j = 0; j < tileScale; j++) {
-                int rgb = image.getRGB(x + i, y + j);
+                final var rgb = image.getRGB(x + i, y + j);
                 redTotal += getRed(rgb);
                 greenTotal += getGreen(rgb);
                 blueTotal += getBlue(rgb);
             }
         }
-        int count = tileScale * tileScale;
+        final var count = tileScale * tileScale;
         return new Pixel(redTotal / count, greenTotal / count, blueTotal / count);
     }
-
 }
