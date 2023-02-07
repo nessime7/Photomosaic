@@ -11,5 +11,4 @@ public class ImageScore {
         this.score = score;
         this.image = image;
     }
-
 }
