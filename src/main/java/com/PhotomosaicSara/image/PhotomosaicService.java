@@ -41,8 +41,16 @@ public class PhotomosaicService {
     }
 
     private int getScore(BufferedImage target, Tile tile) {
-        assert target.getHeight() == Tile.scaledHeight;
-        assert target.getWidth() == Tile.scaledWidth;
+        final var height = target.getHeight();
+        final var width = target.getWidth();
+
+        if (height != Tile.scaledHeight){
+            throw new AssertionError("Unexpected height: " + height);
+        }
+
+        if (width != Tile.scaledWidth){
+            throw new AssertionError("Unexpected width: " + height);
+        }
 
         int total = 0;
         for (int x = 0; x < Tile.scaledWidth; x++) {

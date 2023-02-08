@@ -16,7 +16,7 @@ public class MainPixel {
     public static void main(String[] args) throws IOException {
         BufferedImage targetImage = ImageIO.read(new File("mainImage.jpg"));
 
-        File sourceDir = new File("source_images");
+        final var sourceDir = new File("source_images");
         File[] sourceFiles = sourceDir.listFiles((dir, name) -> name.endsWith(".jpg"));
         BufferedImage[] sourceImages = new BufferedImage[sourceFiles.length];
         for (int i = 0; i < sourceFiles.length; i++) {

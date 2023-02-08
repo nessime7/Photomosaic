@@ -17,7 +17,6 @@ public class Photomosaic {
         final var tileImages = photomosaicService.getImagesFromTiles(new File("source_images"));
         final var inputImageFile = new File("mainImage.jpg");
         final var inputImageParts = photomosaicService.getImagesFromInput(inputImageFile);
-        //  final Collection<BufferedImagePart> outputImageParts = Collections.synchronizedSet(new HashSet<>());
         final ArrayList<BufferedImagePart> outputImageParts = new ArrayList<>();
 
         for (final var inputImagePart : inputImageParts) {
