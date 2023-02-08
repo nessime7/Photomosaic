@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -15,6 +16,17 @@ public class PhotomosaicService {
     private static final int TILE_WIDTH = 90;
     private static final int TILE_HEIGHT = 90;
     private static final int TILE_SCALE = 9;
+
+    public void process() throws IOException {
+        final var inputImageFile = new File("mainImage.jpg");
+        final var inputImageParts = getImagesFromInput(inputImageFile);
+
+        final var tileImages = getImagesFromTiles(new File("source_images"));
+        final ArrayList<BufferedImagePart> outputImageParts = new ArrayList<>();
+
+        createOutput(inputImageParts, tileImages, outputImageParts);
+        getPhotomozaic(inputImageFile, outputImageParts);
+    }
 
     public BufferedImage makeOutputImage(int width, int height, Collection<BufferedImagePart> parts) {
         final var image = new BufferedImage(width * TILE_SCALE, height * TILE_SCALE, BufferedImage.TYPE_3BYTE_BGR);
@@ -102,5 +114,20 @@ public class PhotomosaicService {
             x += w;
         }
         return parts;
+    }
+
+    public void createOutput(Collection<BufferedImagePart> inputImageParts, Collection<Tile> tileImages, ArrayList<BufferedImagePart> outputImageParts) {
+        for (final var inputImagePart : inputImageParts) {
+            final var bestFitTile = getBestFitTile(inputImagePart.image, tileImages);
+            outputImageParts.add(new BufferedImagePart(bestFitTile.image, inputImagePart.x, inputImagePart.y));
+        }
+    }
+
+    public void getPhotomozaic(File inputImageFile, ArrayList<BufferedImagePart> outputImageParts) throws IOException {
+        final var inputImage = ImageIO.read(inputImageFile);
+        final var width = inputImage.getWidth();
+        final var height = inputImage.getHeight();
+        final var output = makeOutputImage(width, height, outputImageParts);
+        ImageIO.write(output, "jpg", new File("photomosaicImage.jpg"));
     }
 }
