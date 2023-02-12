@@ -16,15 +16,20 @@ public class PixelService {
     public void process() throws IOException {
         final var targetImage = ImageIO.read(new File("mainImage.jpg"));
         final var sourceDir = new File("source_images");
-        final var sourceFiles = sourceDir.listFiles((dir, name) -> name.endsWith(".jpg"));
-        final var sourceImages = new BufferedImage[sourceFiles.length];
-        for (int i = 0; i < sourceFiles.length; i++) {
-            sourceImages[i] = ImageIO.read(sourceFiles[i]);
-        }
+        final var sourceImages = getBufferedImages(sourceDir);
 
         final var mosaicImage = new BufferedImage(targetImage.getWidth(), targetImage.getHeight(),
                 BufferedImage.TYPE_INT_RGB);
 
+        createPixelMosaic(targetImage, sourceImages, mosaicImage);
+        savePhotomosaic(mosaicImage);
+    }
+
+    private void savePhotomosaic(BufferedImage mosaicImage) throws IOException {
+        ImageIO.write(mosaicImage, "jpg", new File("PixelPhotomosaic.jpg"));
+    }
+
+    private void createPixelMosaic(BufferedImage targetImage, BufferedImage[] sourceImages, BufferedImage mosaicImage) {
         for (int x = 0; x < targetImage.getWidth(); x += TILE_SIZE) {
             for (int y = 0; y < targetImage.getHeight(); y += TILE_SIZE) {
                 final var targetColor = new Color(targetImage.getRGB(x, y));
@@ -43,8 +48,15 @@ public class PixelService {
                 }
             }
         }
+    }
 
-        ImageIO.write(mosaicImage, "jpg", new File("PixelPhotomosaic.jpg"));
+    private BufferedImage[] getBufferedImages(File sourceDir) throws IOException {
+        final var sourceFiles = sourceDir.listFiles((dir, name) -> name.endsWith(".jpg"));
+        final var sourceImages = new BufferedImage[sourceFiles.length];
+        for (int i = 0; i < sourceFiles.length; i++) {
+            sourceImages[i] = ImageIO.read(sourceFiles[i]);
+        }
+        return sourceImages;
     }
 
     private static int getColorDistance(Color a, Color b) {
