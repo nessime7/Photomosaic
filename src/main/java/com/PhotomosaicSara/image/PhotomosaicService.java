@@ -25,7 +25,7 @@ public class PhotomosaicService {
         final ArrayList<BufferedImagePart> outputImageParts = new ArrayList<>();
 
         createOutput(inputImageParts, tileImages, outputImageParts);
-        getPhotomozaic(inputImageFile, outputImageParts);
+        createPhotomozaic(inputImageFile, outputImageParts);
     }
 
     public BufferedImage makeOutputImage(int width, int height, Collection<BufferedImagePart> parts) {
@@ -87,7 +87,6 @@ public class PhotomosaicService {
     public Collection<Tile> getImagesFromTiles(File tilesDir) throws IOException {
         Collection<Tile> tileImages = Collections.synchronizedSet(new HashSet<>());
         final var files = tilesDir.listFiles();
-        assert files != null;
         for (final var file : files) {
             final var img = ImageIO.read(file);
             tileImages.add(new Tile(img));
@@ -123,7 +122,7 @@ public class PhotomosaicService {
         }
     }
 
-    public void getPhotomozaic(File inputImageFile, ArrayList<BufferedImagePart> outputImageParts) throws IOException {
+    public void createPhotomozaic(File inputImageFile, ArrayList<BufferedImagePart> outputImageParts) throws IOException {
         final var inputImage = ImageIO.read(inputImageFile);
         final var width = inputImage.getWidth();
         final var height = inputImage.getHeight();

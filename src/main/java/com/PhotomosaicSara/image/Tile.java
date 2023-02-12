@@ -6,13 +6,14 @@ import static com.PhotomosaicSara.image.Pixel.*;
 
 public class Tile {
 
+    public Pixel[][] pixels = new Pixel[scaledWidth][scaledHeight];
+    public BufferedImage image;
     private static final int tileWidth = 90;
     private static final int tileHeight = 90;
     private static final int tileScale = 9;
     public static int scaledWidth = tileWidth / tileScale;
     public static int scaledHeight = tileHeight / tileScale;
-    public Pixel[][] pixels = new Pixel[scaledWidth][scaledHeight];
-    public BufferedImage image;
+
 
     public Tile(BufferedImage image) {
         this.image = image;
