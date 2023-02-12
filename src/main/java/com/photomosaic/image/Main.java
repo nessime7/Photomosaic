@@ -1,4 +1,4 @@
-package com.PhotomosaicSara.image;
+package com.photomosaic.image;
 
 import java.io.IOException;
 

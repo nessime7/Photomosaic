@@ -1,4 +1,4 @@
-package com.PhotomosaicSara.pixel;
+package com.photomosaic.pixel;
 
 import java.awt.image.BufferedImage;
 
