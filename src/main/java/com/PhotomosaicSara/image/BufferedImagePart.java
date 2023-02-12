@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 public class BufferedImagePart {
 
     public final BufferedImage image;
-    public final int x;
+    public int x;
     public final int y;
 
     public BufferedImagePart(BufferedImage image, int x, int y) {
