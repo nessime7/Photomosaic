@@ -9,12 +9,11 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class MainPixel {
+public class PixelService {
 
     private static final int TILE_SIZE = 5;
 
-    public static void main(String[] args) throws IOException {
-
+    public void process() throws IOException {
         final var targetImage = ImageIO.read(new File("mainImage.jpg"));
         final var sourceDir = new File("source_images");
         final var sourceFiles = sourceDir.listFiles((dir, name) -> name.endsWith(".jpg"));
