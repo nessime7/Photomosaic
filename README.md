@@ -2,4 +2,4 @@
 
 ## Description:
 Project contains two approaches:
-### Photomosaic from [image](image)
+#### Photomosaic from [image](com.photomosaic/image)
